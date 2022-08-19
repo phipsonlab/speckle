@@ -1,0 +1,19 @@
+Package: speckle
+Type: Package
+Title: Statistical methods for analysing single cell RNA-seq data
+Version: 0.99.0
+Date: 2020-12-02
+Authors@R: 
+  c(person(given = "Belinda",
+           family = "Phipson",
+           role = c("aut", "cre"),
+           email = "phipson.b@wehi.edu.au")
+    )
+Depends: R (>= 3.6.0)
+Imports: limma, edgeR, SingleCellExperiment, Seurat, ggplot2, methods, stats, grDevices, graphics
+VignetteBuilder: knitr
+Suggests: BiocStyle, knitr, rmarkdown, CellBench, scater, patchwork
+Description: The speckle package contains functions for the analysis of single cell RNA-seq data. The speckle package currently contains functions to analyse differences in cell type proportions. There are also functions to estimate the parameters of the Beta distribution based on a given counts matrix, and a function to normalise a counts matrix to the median library size. There are plotting functions to visualise cell type proportions and the mean-variance relationship in cell type proportions and counts. As our research into specialised analyses of single cell data continues we anticipate that the package will be updated with new functions.
+License: GPL-3
+biocViews: SingleCell, RNASeq, Regression, GeneExpression
+RoxygenNote: 7.2.1
