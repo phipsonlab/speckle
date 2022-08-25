@@ -1,0 +1,123 @@
+#' Convert counts or proportions matrix to list object for propeller
+#'
+#' This function takes a matrix of counts or proportions, and returns a list
+#' object that is expected from the \code{propeller.ttest} and 
+#' \code{propeller.anova} functions. This allows the \code{propeller} framework
+#' to be applied to any proportions data, not just single cell data.
+#' 
+#' @param x a matrix of counts or proportions, where the columns correspond to 
+#' samples and the rows correspond to cell types, or entities for which 
+#' proportions are calculated.
+#' @param data.type a character scalar specifying whether the data matrix 
+#' contains counts or proportions. Possible values include "proportions" or 
+#' "counts". Defaults to "proportions".
+#' @param transform a character scalar specifying which transformation of the 
+#' proportions to perform. Possible values include "asin" or "logit". Defaults
+#' to "logit".
+#' @param scale.fac the total number of cells N for each sample. Can be a scalar
+#' or a vector of the same length as the number of samples. If NULL, a default
+#' of 5000 cells per sample is assumed.
+#'
+#' @return outputs a list object with the following components
+#' \item{Counts }{A matrix of cell type counts with
+#' the rows corresponding to the clusters/cell types and the columns
+#' corresponding to the biological replicates/samples.}
+#' \item{TransformedProps }{A matrix of transformed cell type proportions with
+#' the rows corresponding to the clusters/cell types and the columns
+#' corresponding to the biological replicates/samples.} 
+#' \item{Proportions }{A  matrix of cell type proportions with the rows 
+#' corresponding to the clusters/cell types and the columns corresponding to 
+#' the biological replicates/samples.}
+#' 
+#' @export
+#' 
+#' @author Belinda Phipson
+#' 
+#' @seealso \code{\link{getTransformedProps}} \code{\link{propeller.ttest}} 
+#' \code{\link{propeller.anova}}
+#'
+#' @examples
+#'    library(speckle)
+#'    library(limma) 
+#'    # Make up some data with two groups, two biological replicates in each
+#'    # group and three cell types
+#'    # True cell type proportions for 4 samples
+#'    props <- matrix(c(0.5,0.3,0.2,0.6,0.3,0.1,0.3,0.4,0.3,0.4,0.3,0.3),
+#'    ncol=4, nrow=3, byrow=FALSE)
+#'    rownames(props) <- c("C0","C1","C2")
+#'    colnames(props) <- paste("S",c(1,2,3,4),sep="")
+#'    # Total numbers of cells per sample
+#'    numcells <- c(1000,1500,900,1200)
+#' 
+#'    # Get data into list object to use as input to propeller.ttest
+#'    propslist <- convertDataToList(props, data.type="proportions", 
+#'    transform="asin",scale.fac=numcells)
+#' 
+#'    # Run propeller.ttest to test for differences between 2 groups
+#'    # Assume s1 and s2 belong to group 1 and s3 and s4 belong to group 2
+#'    grp <- rep(c("A","B"), each=2)
+#' 
+#'    design <- model.matrix(~0+grp)
+#'    design
+#' 
+#'    # Compare Grp A to B
+#'    contrasts <- c(1,-1)
+#'
+#'    propeller.ttest(propslist, design=design, contrasts=contrasts, 
+#'    robust=TRUE, trend=FALSE, sort=TRUE)
+#'    
+#' 
+convertDataToList <- function(x, data.type=c("proportions","counts"), 
+                              transform=NULL, scale.fac=NULL)
+    # Author Belinda Phipson
+    # Data 06/06/2022
+    # Convert to list object that propeller expects in propeller.ttest and 
+    # propeller.anova
+{
+    type <- match.arg(data.type,c("proportions","counts"))
+    x <- as.matrix(x)
+    # scale.fac is total num cells parameter N for each sample
+    if(is.null(scale.fac)) scale.fac <- 5000
+    scale.fac <- edgeR::expandAsMatrix(scale.fac,dim=dim(x), byrow=TRUE)
+  
+    if(is.null(transform)) transform <- "logit"
+
+    if(type=="proportions"){
+        if(transform=="asin"){
+            message("Performing arcsin square root transformation of 
+                    proportions")
+            prop.trans <- t(asin(sqrt(x)))
+        }
+        else if(transform=="logit"){
+            message("Performing logit transformation of proportions")
+            tab <- t(x*scale.fac)
+            props <- tab/rowSums(tab)
+            props.pseudo <- (tab+0.5)/rowSums(tab+0.5)
+            prop.trans <- log(props.pseudo/(1-props.pseudo))
+        }
+        list(Counts=x*scale.fac, TransformedProps=t(prop.trans), Proportions=x)
+    }
+
+    else if(type=="counts"){
+        tab <- t(x)
+        props <- tab/rowSums(tab)
+        if(transform=="asin"){
+            message("Performing arcsin square root transformation of 
+                    proportions")
+            prop.trans <- asin(sqrt(props))
+        }
+        else if(transform=="logit"){
+            message("Performing logit transformation of proportions")
+            props.pseudo <- (tab+0.5)/rowSums(tab+0.5)
+            prop.trans <- log(props.pseudo/(1-props.pseudo))
+        }
+        list(Counts=t(tab), TransformedProps=t(prop.trans), 
+             Proportions=t(props))
+    }
+
+    else message("invalid data type")
+
+}
+
+
+
