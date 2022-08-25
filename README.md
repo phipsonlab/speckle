@@ -9,9 +9,11 @@ type proportions in single cell RNA-seq data. As our research into specialised
 analyses of single cell data continues we anticipate that the package will be 
 updated with new functions.
 
-The propeller method has now been accepted for publicaton in Bioinformatics. 
-Please use the following citation when using propeller:
-Phipson, B, Sim, CB, Porrello, ER, Hewitt, AW, Powell, J, Oshlack, A (2022). propeller: testing for differences in cell type proportions in single cell data. Bioinformatics, accepted 22 August 2022.
+The propeller method has now been accepted for publicaton in *Bioinformatics*. 
+Please use the following citation when using propeller: \
+Phipson, B, Sim, CB, Porrello, ER, Hewitt, AW, Powell, J, Oshlack, A (2022). propeller: testing for differences in cell type proportions in single cell data. *Bioinformatics*, accepted 22 August 2022.
+
+The preprint is available on [bioRxiv](https://www.biorxiv.org/content/10.1101/2021.11.28.470236v2.full).
 
 The propeller, propeller.ttest and propeller.anova functions perform 
 statistical tests for differences in cell type composition in single cell data. 
