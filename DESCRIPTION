@@ -9,7 +9,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "phipson.b@wehi.edu.au")
     )
-Depends: R (>= 3.6.0)
+Depends: R (>= 4.2.0)
 Imports: limma, edgeR, SingleCellExperiment, Seurat, ggplot2, methods, stats, grDevices, graphics
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown, CellBench, scater, patchwork
