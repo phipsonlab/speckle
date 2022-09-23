@@ -68,7 +68,7 @@
 #'    
 #' 
 convertDataToList <- function(x, data.type=c("proportions","counts"), 
-                              transform=NULL, scale.fac=NULL)
+                                transform=NULL, scale.fac=NULL)
     # Author Belinda Phipson
     # Data 06/06/2022
     # Convert to list object that propeller expects in propeller.ttest and 
@@ -79,7 +79,7 @@ convertDataToList <- function(x, data.type=c("proportions","counts"),
     # scale.fac is total num cells parameter N for each sample
     if(is.null(scale.fac)) scale.fac <- 5000
     scale.fac <- edgeR::expandAsMatrix(scale.fac,dim=dim(x), byrow=TRUE)
-  
+    
     if(is.null(transform)) transform <- "logit"
 
     if(type=="proportions"){
@@ -112,7 +112,7 @@ convertDataToList <- function(x, data.type=c("proportions","counts"),
             prop.trans <- log(props.pseudo/(1-props.pseudo))
         }
         list(Counts=t(tab), TransformedProps=t(prop.trans), 
-             Proportions=t(props))
+            Proportions=t(props))
     }
 
     else message("invalid data type")
