@@ -75,7 +75,6 @@ to be applied to any proportions data, not just single cell data.
 
     propeller.ttest(propslist, design=design, contrasts=contrasts, 
     robust=TRUE, trend=FALSE, sort=TRUE)
-   
 
 }
 \seealso{
