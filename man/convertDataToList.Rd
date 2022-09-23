@@ -5,10 +5,10 @@
 \title{Convert counts or proportions matrix to list object for propeller}
 \usage{
 convertDataToList(
-  x,
-  data.type = c("proportions", "counts"),
-  transform = NULL,
-  scale.fac = NULL
+    x,
+    data.type = c("proportions", "counts"),
+    transform = NULL,
+    scale.fac = NULL
 )
 }
 \arguments{
@@ -47,34 +47,34 @@ object that is expected from the \code{propeller.ttest} and
 to be applied to any proportions data, not just single cell data.
 }
 \examples{
-   library(speckle)
-   library(limma) 
-   # Make up some data with two groups, two biological replicates in each
-   # group and three cell types
-   # True cell type proportions for 4 samples
-   props <- matrix(c(0.5,0.3,0.2,0.6,0.3,0.1,0.3,0.4,0.3,0.4,0.3,0.3),
-   ncol=4, nrow=3, byrow=FALSE)
-   rownames(props) <- c("C0","C1","C2")
-   colnames(props) <- paste("S",c(1,2,3,4),sep="")
-   # Total numbers of cells per sample
-   numcells <- c(1000,1500,900,1200)
+    library(speckle)
+    library(limma) 
+    # Make up some data with two groups, two biological replicates in each
+    # group and three cell types
+    # True cell type proportions for 4 samples
+    props <- matrix(c(0.5,0.3,0.2,0.6,0.3,0.1,0.3,0.4,0.3,0.4,0.3,0.3),
+    ncol=4, nrow=3, byrow=FALSE)
+    rownames(props) <- c("C0","C1","C2")
+    colnames(props) <- paste("S",c(1,2,3,4),sep="")
+    # Total numbers of cells per sample
+    numcells <- c(1000,1500,900,1200)
 
-   # Get data into list object to use as input to propeller.ttest
-   propslist <- convertDataToList(props, data.type="proportions", 
-   transform="asin",scale.fac=numcells)
+    # Get data into list object to use as input to propeller.ttest
+    propslist <- convertDataToList(props, data.type="proportions", 
+    transform="asin",scale.fac=numcells)
 
-   # Run propeller.ttest to test for differences between 2 groups
-   # Assume s1 and s2 belong to group 1 and s3 and s4 belong to group 2
-   grp <- rep(c("A","B"), each=2)
+    # Run propeller.ttest to test for differences between 2 groups
+    # Assume s1 and s2 belong to group 1 and s3 and s4 belong to group 2
+    grp <- rep(c("A","B"), each=2)
 
-   design <- model.matrix(~0+grp)
-   design
+    design <- model.matrix(~0+grp)
+    design
 
-   # Compare Grp A to B
-   contrasts <- c(1,-1)
+    # Compare Grp A to B
+    contrasts <- c(1,-1)
 
-   propeller.ttest(propslist, design=design, contrasts=contrasts, 
-   robust=TRUE, trend=FALSE, sort=TRUE)
+    propeller.ttest(propslist, design=design, contrasts=contrasts, 
+    robust=TRUE, trend=FALSE, sort=TRUE)
    
 
 }
