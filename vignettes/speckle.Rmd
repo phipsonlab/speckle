@@ -5,8 +5,7 @@ date: "`r BiocStyle::doc_date()`"
 package: "`r BiocStyle::pkg_ver('speckle')`"
 vignette: >
     %\VignetteEncoding{UTF-8}
-    %\VignetteIndexEntry{speckle: statistical methods for analysing 
-                            single cell RNA-seq data}
+    %\VignetteIndexEntry{speckle: statistical methods for analysing single cell RNA-seq data}
     %\VignetteEngine{knitr::rmarkdown}
 output: >
     BiocStyle::html_document
