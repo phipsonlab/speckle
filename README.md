@@ -4,6 +4,14 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
+## Citation
+The propeller method has now been accepted for publicaton in *Bioinformatics*. 
+Please use the following citation when using propeller: \
+Belinda Phipson, Choon Boon Sim, Enzo R Porrello, Alex W Hewitt, Joseph Powell, Alicia Oshlack, propeller: testing for differences in cell type proportions in single cell data, Bioinformatics, 2022;, btac582, [https://doi.org/10.1093/bioinformatics/btac582](https://doi.org/10.1093/bioinformatics/btac582)
+
+The preprint is available on [bioRxiv](https://www.biorxiv.org/content/10.1101/2021.11.28.470236v2.full).
+
+## Introduction
 The speckle package currently contains functions to analyse differences in cell 
 type proportions in single cell RNA-seq data. As our research into specialised 
 analyses of single cell data continues we anticipate that the package will be 
@@ -28,13 +36,6 @@ are outputted for each cell type.
 
 The propeller.ttest() and propeller.anova() are more general functions that can 
 account for additional covariates in the analysis.
-
-## Citation
-The propeller method has now been accepted for publicaton in *Bioinformatics*. 
-Please use the following citation when using propeller: \
-Belinda Phipson, Choon Boon Sim, Enzo R Porrello, Alex W Hewitt, Joseph Powell, Alicia Oshlack, propeller: testing for differences in cell type proportions in single cell data, Bioinformatics, 2022;, btac582, [https://doi.org/10.1093/bioinformatics/btac582](https://doi.org/10.1093/bioinformatics/btac582)
-
-The preprint is available on [bioRxiv](https://www.biorxiv.org/content/10.1101/2021.11.28.470236v2.full).
 
 ## Installation
 
