@@ -135,7 +135,7 @@ propeller.anova <- function(prop.list=prop.list, design=design, coef = coef,
                     P.Value=p.value, FDR=fdr)
     if(sort){
         o <- order(out$P.Value)
-        out[o,]
+        return(out[o,])
     }
-    else out
+    else return(out)
 }
