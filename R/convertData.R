@@ -115,7 +115,9 @@ convertDataToList <- function(x, data.type=c("proportions","counts"),
             Proportions=t(props)))
     }
 
-    else return(message("invalid data type"))
+    else{
+        return(message("invalid data type"))
+    }
 
 }
 
