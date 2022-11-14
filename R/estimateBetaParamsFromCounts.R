@@ -47,5 +47,5 @@ estimateBetaParamsFromCounts <- function(x){
     pi <- alpha/(alpha+beta)
     var <- n*pi*(1-pi)*(n*disp+1)/(1+disp)
     output <- list(n=n, alpha=alpha, beta=beta, pi=pi, dispersion=disp, var=var)
-    output
+    return(output)
 }
