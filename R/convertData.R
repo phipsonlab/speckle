@@ -95,7 +95,8 @@ convertDataToList <- function(x, data.type=c("proportions","counts"),
             props.pseudo <- (tab+0.5)/rowSums(tab+0.5)
             prop.trans <- log(props.pseudo/(1-props.pseudo))
         }
-        return(list(Counts=x*scale.fac, TransformedProps=t(prop.trans), Proportions=x))
+        return(list(Counts=x*scale.fac, TransformedProps=t(prop.trans), 
+                    Proportions=x))
     }
 
     else if(type=="counts"){
