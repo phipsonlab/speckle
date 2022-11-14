@@ -45,5 +45,5 @@ speckle_example_data <- function(){
     # Assume s1 and s2 belong to group 1 and s3 and s4 belong to group 2
     grp <- rep(c("grp1","grp2"),c(sum(numcells[c(1,2)]),sum(numcells[c(3,4)])))
 
-    data.frame(clusters=clust, samples=biorep, group=grp)
+    return(data.frame(clusters=clust, samples=biorep, group=grp))
 }
