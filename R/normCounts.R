@@ -71,7 +71,7 @@ normCounts <-function(x, log=FALSE, prior.count=0.5, lib.size=NULL)
     if(log){
         prior.count.scaled <- lib.size/mean(lib.size)*prior.count
         lib.size <- lib.size + 2*prior.count.scaled
-        log2(t((t(counts)+prior.count.scaled)/lib.size*M))
+        return(log2(t((t(counts)+prior.count.scaled)/lib.size*M)))
     }
-    else t(t(counts)/lib.size*M)
+    else return(t(t(counts)/lib.size*M))
 }
