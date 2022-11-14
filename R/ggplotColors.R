@@ -29,6 +29,6 @@ ggplotColors <- function(g){
 
     h <- cumsum(c(15, rep(d,g - 1)))
 
-    hcl(h = h, c = 100, l = 65)
+    return(hcl(h = h, c = 100, l = 65))
 
 }
