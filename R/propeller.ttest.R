@@ -145,8 +145,7 @@ propeller.ttest <- function(prop.list=prop.list, design=design,
     if(sort){
         o <- order(out$P.Value)
         return(out[o,])
-    }
-    else{
+    }else{
         return(out)
     }
 }
