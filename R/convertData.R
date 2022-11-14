@@ -95,7 +95,7 @@ convertDataToList <- function(x, data.type=c("proportions","counts"),
             props.pseudo <- (tab+0.5)/rowSums(tab+0.5)
             prop.trans <- log(props.pseudo/(1-props.pseudo))
         }
-        list(Counts=x*scale.fac, TransformedProps=t(prop.trans), Proportions=x)
+        return(list(Counts=x*scale.fac, TransformedProps=t(prop.trans), Proportions=x))
     }
 
     else if(type=="counts"){
@@ -111,11 +111,11 @@ convertDataToList <- function(x, data.type=c("proportions","counts"),
             props.pseudo <- (tab+0.5)/rowSums(tab+0.5)
             prop.trans <- log(props.pseudo/(1-props.pseudo))
         }
-        list(Counts=t(tab), TransformedProps=t(prop.trans), 
-            Proportions=t(props))
+        return(list(Counts=t(tab), TransformedProps=t(prop.trans), 
+            Proportions=t(props)))
     }
 
-    else message("invalid data type")
+    else return(message("invalid data type"))
 
 }
 
