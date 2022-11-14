@@ -159,7 +159,7 @@ propeller <- function(x=NULL, clusters=NULL, sample=NULL, group=NULL,
         out <- propeller.ttest(prop.list, design, contrasts=contrasts,
                                 robust=robust, trend=trend, sort=FALSE)
         out <- data.frame(BaselineProp=baseline.props,out)
-        out[order(out$P.Value),]
+        return(out[order(out$P.Value),])
     }
     else if(ncol(design)>=2){
         message("group variable has > 2 levels, ANOVA will be performed")
@@ -167,7 +167,7 @@ propeller <- function(x=NULL, clusters=NULL, sample=NULL, group=NULL,
         out <- propeller.anova(prop.list, design, coef=coef, robust=robust,
                                 trend=trend, sort=FALSE)
         out <- data.frame(BaselineProp=as.vector(baseline.props),out)
-        out[order(out$P.Value),]
+        return(out[order(out$P.Value),])
     }
 
 }
@@ -214,7 +214,7 @@ propeller <- function(x=NULL, clusters=NULL, sample=NULL, group=NULL,
     clusters <- factor(Idents(x))
     sample <- factor(x$SAMPLE)
     group <- factor(x$GROUP)
-    data.frame(clusters=clusters,sample=sample,group=group)
+    return(data.frame(clusters=clusters,sample=sample,group=group))
 }
 
 
