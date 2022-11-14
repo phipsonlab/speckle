@@ -84,5 +84,6 @@ getTransformedProps <- function(clusters=clusters, sample=sample,
         props.pseudo <- (tab+0.5)/rowSums(tab+0.5)
         prop.trans <- log(props.pseudo/(1-props.pseudo))
     }
-    list(Counts=t(tab), TransformedProps=t(prop.trans), Proportions=t(props))
+    return(list(Counts=t(tab), TransformedProps=t(prop.trans), 
+                Proportions=t(props)))
 }
