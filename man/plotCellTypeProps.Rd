@@ -46,8 +46,8 @@ rownames(countsA) <- rownames(countsB) <- paste("c",0:2,sep="")
 
 allcounts <- cbind(countsA, countsB)
 sample <- c(rep(colnames(allcounts),allcounts[1,]),
-            rep(colnames(allcounts),allcounts[2,]),
-            rep(colnames(allcounts),allcounts[3,]))
+          rep(colnames(allcounts),allcounts[2,]),
+          rep(colnames(allcounts),allcounts[3,]))
 clust <- rep(rownames(allcounts),rowSums(allcounts))
 
 plotCellTypeProps(clusters=clust, sample=sample)

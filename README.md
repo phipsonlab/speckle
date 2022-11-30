@@ -39,16 +39,15 @@ account for additional covariates in the analysis.
 
 ## Installation
 
-If you would like to view the speckle vignette, you can install the released 
-version of speckle from [github](https://github.com/phipsonlab/speckle) using the 
-following commands:
+We are currently in the process of submitting speckle to Bioconductor. Once
+it has passed review, the following installation instructions can be used to 
+install speckle:
 
 ``` r
-# devtools/remotes won't install Suggested packages from Bioconductor
-BiocManager::install(c("CellBench", "BiocStyle", "scater"))
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
 
-remotes::install_github("phipsonlab/speckle", build_vignettes = TRUE, 
-dependencies = "Suggest")
+BiocManager::install("speckle")
 ```
 
 In order to view the vignette for speckle use the following command:
@@ -57,8 +56,16 @@ In order to view the vignette for speckle use the following command:
 browseVignettes("speckle")
 ```
 
-If you don't care to view the glorious vignette you can also install speckle as 
-follows:
+To install speckle from github, use either of the following commands:
+
+``` r
+BiocManager::install(c("CellBench", "BiocStyle", "scater"))
+
+remotes::install_github("phipsonlab/speckle", build_vignettes = TRUE, 
+dependencies = "Suggest")
+```
+
+The remotes package allows the vignette to be built.
 
 ``` r
 library(devtools)

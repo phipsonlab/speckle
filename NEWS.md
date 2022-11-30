@@ -1,3 +1,9 @@
+# speckle 0.99.2
+* Added convertDataToList() to allow propeller to work with any proportions data
+* Added unit tests
+* Added minor changes for Bioconductor submission
+* Update vignette to include example of analysing proportions data directly
+
 # speckle 0.99.0 
 * remove classifySex functions in preparation for submission to Bioconductor
 * speckle only contains propeller functions

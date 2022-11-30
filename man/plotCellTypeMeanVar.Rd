@@ -40,8 +40,7 @@ b <- a*(1-p)/p
 # Sample total cell counts per sample from negative binomial distribution
 numcells <- rnbinom(nsamp,size=20,mu=5000)
 true.p <- matrix(c(rbeta(nsamp,a,b[1]),rbeta(nsamp,a,b[2]),
-                    rbeta(nsamp,a,b[3]),rbeta(nsamp,a,b[4])),
-                    byrow=TRUE, ncol=nsamp)
+          rbeta(nsamp,a,b[3]),rbeta(nsamp,a,b[4])),byrow=TRUE, ncol=nsamp)
 
 counts <- matrix(NA,ncol=nsamp, nrow=nrow(true.p))
 rownames(counts) <- paste("c",0:(nrow(true.p)-1), sep="")

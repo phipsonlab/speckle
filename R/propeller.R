@@ -192,7 +192,7 @@ propeller <- function(x=NULL, clusters=NULL, sample=NULL, group=NULL,
     clusters <- factor(colData(x)$CLUSTER)
     sample <- factor(colData(x)$SAMPLE)
     group <- factor(colData(x)$GROUP)
-    data.frame(clusters=clusters,sample=sample,group=group)
+    return(data.frame(clusters=clusters,sample=sample,group=group))
 }
 
 #' Extract metadata from \code{Seurat} object
