@@ -17,6 +17,7 @@ Suggests:
     BiocStyle,
     knitr,
     rmarkdown,
+    statmod,
     CellBench,
     scater,
     patchwork,

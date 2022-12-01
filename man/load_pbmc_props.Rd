@@ -21,4 +21,9 @@ pbmc_props <- pbmc_list$proportions
 pbmc_sample_info <- pbmc_list$sample_info
 tot_cells <- pbmc_list$total_cells
 
+pbmc_props
+
+barplot(as.matrix(pbmc_props),col=ggplotColors(nrow(pbmc_props)),
+ylab="Cell type proportions", xlab="Samples")
+
 }

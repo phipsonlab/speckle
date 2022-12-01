@@ -15,6 +15,7 @@
 #'
 #' @return a base R plot
 #' 
+#' @importFrom edgeR effectiveLibSizes
 #' @importFrom edgeR estimateDisp
 #' @importFrom edgeR DGEList
 #' @importFrom graphics legend lines par title
