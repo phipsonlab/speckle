@@ -1,4 +1,4 @@
-# speckle 0.99.2
+# speckle 0.99.3
 * Added convertDataToList() to allow propeller to work with any proportions data
 * Added unit tests
 * Added minor changes for Bioconductor submission
