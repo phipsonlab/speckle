@@ -572,47 +572,51 @@ data, where cell type proportions were inferred using deconvolution methods.
 
 An example of how to do this analysis is shown here for single cell data from
 young and old PBMC single cell data, where only the cell type proportions data
-was included as a resource in the following paper: \
+is included as a resource in the following paper: \
 Huang Z.  et al.  (2021) Effects of sex and aging on the immune cell landscape 
 as assessed by single-cell transcriptomic analysis. Proc. Natl. Acad. Sci. USA, 
 118, e2023216118.
 
-The proportions data can be accessed from the `r BiocStyle::Biocpkg("speckle")` 
-package with the `load_pbmc_props` function.
+The proportions data is available in the `r BiocStyle::Biocpkg("speckle")` 
+package and can be accessed with the `data` function. It is a list object that 
+contains three components: a data frame of cell type proportions, a data frame
+of sample information including sex and age, and the total number of cells.
 
 ```{r}
-pbmc_list <- load_pbmc_props()
-pbmc_props <- pbmc_list$proportions
-pbmc_sample_info <- pbmc_list$sample_info
-tot_cells <- pbmc_list$total_cells
+data("pbmc_props")
+pbmc.props <- pbmc_props$proportions
+pbmc.sample.info <- pbmc_props$sample_info
+tot.cells <- pbmc_props$total_cells
 ```
 
 ```{r, fig.width=10, fig.height=6}
-barplot(as.matrix(pbmc_props),col=ggplotColors(nrow(pbmc_props)),
+par(mfrow=c(1,1))
+barplot(as.matrix(pbmc.props),col=ggplotColors(nrow(pbmc.props)),
         ylab="Cell type proportions", xlab="Samples")
 ```
 
 We can convert the proportions data into the list object that the `propeller` 
 functions expect using the `convertDataToList` function. This function can take
-either counts or proportions.
+either counts or proportions, specified with the `data.type` parameter.
 
 ```{r}
-prop.list <- convertDataToList(pbmc_props,data.type="proportions", 
-                               transform="logit", scale.fac=tot_cells/20)
+prop.list <- convertDataToList(pbmc.props,data.type="proportions", 
+                               transform="logit", scale.fac=tot.cells/20)
 ```
 
 The `scale.fac` parameter can be a vector or scalar. It is the number of cells 
 sequenced per sample. Here we are taking a best guess because from the published
-paper all we know is that in total `r tot_cells` were sequenced for the whole
+paper all we know is that in total `r tot.cells` were sequenced for the whole
 dataset. As there are 20 samples, we divide the total number of cells by 20
 to get a rough estimate of total number of cells per sample. This is used 
 specifically when the logit transform is used, but not needed for the arcsin 
-square root transformation.
+square root transformation. If `scale.fac` is a vector, it should be the same
+length as the number of samples in the study.
 
 We can now test young vs old, taking sex into account.
 
 ```{r}
-designAS <- model.matrix(~0+pbmc_sample_info$age + pbmc_sample_info$sex)
+designAS <- model.matrix(~0+pbmc.sample.info$age + pbmc.sample.info$sex)
 colnames(designAS) <- c("old","young","MvsF")
 
 # Young vs old
@@ -626,16 +630,16 @@ cells are enriched in the old samples. We can visualise the significant cell
 types to check they make sense:
 
 ```{r}
-group.immune <- paste(pbmc_sample_info$sex, pbmc_sample_info$age, sep=".")
+group.immune <- paste(pbmc.sample.info$sex, pbmc.sample.info$age, sep=".")
 par(mfrow=c(1,2))
-stripchart(as.numeric(pbmc_props["CD8.Naive",])~group.immune,
+stripchart(as.numeric(pbmc.props["CD8.Naive",])~group.immune,
            vertical=TRUE, pch=c(8,16), method="jitter",
            col = c(ggplotColors(20)[20],"hotpink",4, "darkblue"),cex=2,
            ylab="Proportions", cex.axis=1.25, cex.lab=1.5,
            group.names=c("F.Old","F.Young","M.Old","M.Young"))
 title("CD8.Naive: Young Vs Old", cex.main=1.5, adj=0)
 
-stripchart(as.numeric(pbmc_props["CD16",])~group.immune,
+stripchart(as.numeric(pbmc.props["CD16",])~group.immune,
            vertical=TRUE, pch=c(8,16), method="jitter",
            col = c(ggplotColors(20)[20],"hotpink",4, "darkblue"),cex=2,
            ylab="Proportions", cex.axis=1.25, cex.lab=1.5,

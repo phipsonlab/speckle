@@ -1,0 +1,22 @@
+citHeader("To cite speckle in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "propeller: testing for differences in cell type proportions in single cell data",
+  author   = c(person("Belinda","Phipson"), 
+             c(person("Choon Boon","Sim"), 
+             c(person("Enzo R","Porrello"), 
+             c(person("Alex W","Hewitt"),
+             c(person("Joseph","Powell"), 
+             c(person("Alicia","Oshlack"),
+  journal  = "Bioinformatics",
+  year     = 2022,
+  volume   = 38,
+  number   = 20,
+  pages    = 4720-4726,
+  url      = "https://doi.org/10.1093/bioinformatics/btac582",
+  textVersion = paste("Belinda Phipson, Choon Boon Sim, Enzo R Porrello, Alex W 
+  Hewitt, Joseph Powell, Alicia Oshlack, propeller: testing for differences in 
+  cell type proportions in single cell data, Bioinformatics, Volume 38, Issue 
+  20, 15 October 2022, Pages 4720–4726")
+)
